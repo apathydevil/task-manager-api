@@ -1,9 +1,10 @@
-from pydantic import BaseModel
+from database import Base
+from sqlalchemy import Integer, String, Boolean
+from sqlalchemy.orm import Mapped, mapped_column
 
-class TaskCreate(BaseModel):
-    title: str
-    done: bool = False
+class Task(Base):
+    __tablename__ = "tasks"
 
-class Task(TaskCreate):
-    id: int
-
+    id : Mapped[int] = mapped_column(Integer, primary_key=True)
+    title : Mapped[str] = mapped_column(String)
+    done : Mapped[bool] = mapped_column(Boolean, default=False)
