@@ -23,7 +23,7 @@ async def read_root():
 async def show_tasks(db: Session = Depends(get_db)):
     return db.query(TaskModel).all()
 
-@app.post("/tasks")
+@app.post("/tasks", status_code=201)
 async def write_tasks(task: TaskCreate, db: Session = Depends(get_db)):
     new_task = TaskModel(title=task.title, done=task.done)
     db.add(new_task)
